@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-primary bg-gray-200;
+  }
+  .dropdown {
+    @apply w-full lg:max-w-[296px] cursor-pointer backdrop-blur-[50pxo];
+  }
+  .dropdown-btn {
+    @apply flex h-[64px] items-center px-[18px] border rounded-lg;
+  }
+  .dropdown-icon-primary {
+    @apply text-2xl mr-[18px] text-violet-700;
+  }
+  .dropdown-icon-secondary {
+    @apply text-2xl text-violet-700 ml-auto;
+  }
+  .dropdown-menu {
+    @apply px-6 py-8 text-[15px] space-y-6 shadow-md bg-white absolute w-full z-10 list-none rounded-b-lg;
+  }
+
+  /* Navigation link */
+ .navigation{
+  @apply backdrop-blur-lg bg-transparent border border-gray-300 cursor-pointer  px-4 py-3 rounded-lg transition
+}
+
+  .navigation::after{
+  @apply absolute left-0 bottom-[-6px] w-full h-[3px] bg-black rounded-sm scale-x-0 transform delay-500
+  }
+
+  .navigation:hover::after{
+    @apply  scale-x-100
+  }
+
+  /* Login Form */
+  .input-box{
+    @apply relative  w-full h-[50px] border-b-2 text-white border-black my-[30px]
+  }
+  .input-label{
+   @apply absolute top-[50%] left-[5px] translate-y-[-50%] font-[1em] pointer-events-none transition-[5s]
+  }
+  .input:focus~label,
+  .input:valid~label {
+    @apply top-[-5px]
+  }
+  .input{
+  @apply w-full h-full bg-transparent border-none outline-none text-black font-bold  text-[1em] pr-[35px]
+  }
+  .icon{
+  @apply absolute right-[8px] font-semibold text-[#162938] top-4
+  }
+  .remember-forget{
+   @apply font-semibold text-black text-[1em] flex justify-between my-[15px]
+  }
+  .remember-forgot-input{
+    @apply accent-black
+  }
+  .links{
+    @apply  text-gray-700 font-[600] hover:underline
+  }
+  .account-register{
+    @apply my-[15px] text-center
+  }
+  .btn{
+  @apply w-full bg-violet-700 text-white p-[6px] h-[50px] text-center rounded-sm hover:bg-violet-500 transition 
+  }
+  .close-icon{
+    @apply absolute top-0 right-0 w-[25px] h-[25px] bg-[#162938] text-[.9em] text-white  rounded-bl-lg z-10 cursor-pointer
+  }
+
+  .active{
+    @apply h-[520px] 
+  }
+  
+  .btnPop{
+    @apply hidden;
+  }
+  .btnPush{
+    @apply scale-100 transition-[530px] ease-out;
+    
+  } 
+}
