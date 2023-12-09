@@ -47,10 +47,10 @@
     @apply top-[-5px]
   }
   .input{
-  @apply w-full h-full bg-transparent border-none outline-none text-black font-bold  text-[1em] pr-[35px]
+  @apply w-full h-full bg-transparent border-none outline-none text-black font-[400]  text-[15px] pr-[35px]
   }
   .icon{
-  @apply absolute right-[8px] font-semibold text-[#162938] top-4
+  @apply absolute right-[8px] font-semibold text-[20px] text-[#162938] top-4
   }
   .remember-forget{
    @apply font-semibold text-black text-[1em] flex justify-between my-[15px]
@@ -82,4 +82,12 @@
     @apply scale-100 transition-[530px] ease-out;
     
   } 
+
+  /* for admindashboard */
+  .activated{
+    @apply bg-[#e8eaef] h-[47px] rounded-sm font-semibold;
+  }
+  .addPropertyshow{
+    @apply scale-100;
+  }
 }

@@ -48,7 +48,7 @@ const CountryDropdown = () => {
 
       <div className=" mt-1 z-0">
        <label>
-        <input type="checkbox"className="text-[1em]"/> <span className="text-violet-700 font-[500] text-[1em]">Near Me</span>
+        <input type="checkbox"className="text-[1em]"/> <span className="text-white font-[500] text-[1em]">Near Me</span>
        </label>
       </div>
     </div>

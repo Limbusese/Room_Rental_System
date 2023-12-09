@@ -29,7 +29,7 @@ const Header = () => {
             </div>
             <div className="backdrop-blur-lg navigation border p-2 py-3 rounded-lg flex gap-x-2 items-center bg-backdrop-blur-sm hover:text-violet-800 hover:underline">
               <FaPlus />
-              <Link className="" to="/addproperty">
+              <Link className="" to="/dashboard">
                 Add Property
               </Link>
             </div>
@@ -37,7 +37,7 @@ const Header = () => {
               onClick={loggedIn}
               className="navigation hover:text-violet-800 hover:underline"
             >
-              <Link to="/register">Log In</Link>
+              <Link to="">Log In</Link>
             </div>
           </div>
         </div>
