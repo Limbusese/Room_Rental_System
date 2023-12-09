@@ -8,4 +8,4 @@ mongoose.connect('mongodb://127.0.0.1:27017/kothaNepal', {
     console.log(`Connection sucessful`);
 }).catch((e) =>{
     console.log(`no connection` +e);
-})
+});

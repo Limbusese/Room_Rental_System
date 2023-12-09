@@ -1,9 +1,12 @@
-import React, {  useRef, useState } from "react";
-import Agent from "../../assets/img/agents/agent1.png";
+import React, {  useRef } from "react";
+import Agent from "../../assets/img/agents/agent12.png";
 import Video from "../../../src/assets/img/mainvideos.mp4";
 import Logo from "../../../src/assets/img/logo.svg";
+
+
 import PropertyForm from "./PropertyForm";
-import MyListing from "./MyLisiting";
+import MyListing from "./MyListing";
+
 
 //import icons
 import {
@@ -19,8 +22,8 @@ import { FcComments } from "react-icons/fc";
 const AdminPanel = () => {
   const container = useRef();
   const propertyPop = useRef();
-  const [isActive, setIsActive] = useState(false);
-  console.log(isActive)
+
+
 
   const dashBoardClicked = () => {
  
@@ -29,7 +32,6 @@ const AdminPanel = () => {
 
     const addProperty = container.current.querySelector('.addProperty');
     addProperty.classList.remove('activated');
-   
 
   };
 
@@ -48,12 +50,12 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="h-auto w-[85rem] rounded-lg ml-[80px] mb-6 bg-[#dde1e1]">
+    <div className="h-auto w-[87rem] rounded-lg ml-[60px] mb-6  bg-[#dde1e1]">
       <div className="flex flex-row">
         <div className=" h-[59rem] w-[280px] border-r-[1px] border-[#eceef0] bg-[#d1efe0] p-3 rounded-md">
           <div>
             <a href="/">
-              <img src={Logo} />
+              <img src={Logo} alt="logo"/> 
             </a>
           </div>
 
@@ -107,7 +109,7 @@ const AdminPanel = () => {
             <div className="font-semibold text-lg mt-8 ml-[4.5rem]">
               <h1>Hi Sese Limbu, Welcomeback</h1>
             </div>
-            <div className="h-[20rem] w-[57rem] ml-[70px] mt-9 rounded-md border-2 overflow-hidden  relative ">
+            <div className="h-[20rem] w-[58rem] ml-[70px] mt-9 rounded-md border-2 overflow-hidden  relative ">
               <video
                 src={Video}
                 autoPlay
@@ -150,11 +152,11 @@ const AdminPanel = () => {
             </div>
 
             {/* My Listings */}
-            <div className="mt-12 pl-[4.5rem]">
-              <div className="text-[20px] font-[500] border-b-2">
+            <div className="mt-12">
+              <div className="text-[20px] font-[500] border-b-2 pl-[4.5rem]">
                 <h1>My Listings</h1>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 pl-[3rem]">
                 < MyListing />
               </div>
             </div>

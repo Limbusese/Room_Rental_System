@@ -3,6 +3,7 @@ import Video from "../assets/img/video.mp4";
 import Search from "./Search";
 import Header from "../components/Header";
 
+
 const Hero = () => {
   return (
     <section className="relative h-[780px] rounded-lg ">

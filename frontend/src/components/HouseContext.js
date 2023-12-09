@@ -1,33 +1,63 @@
-import React, { useState, useEffect, createContext } from "react";
-import { housesData } from "../data";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import HouseList from "./HouseList";
+import NearMeHouseList from "./NearMeHouse";
 
 export const HouseContext = createContext();
+export const NearMeHouseData = createContext({ houseData: [] });
 
-const HouseContextProvider = ({ children }) => {
-  const [houses, setHouses] = useState(housesData);
-  const [country, setCountry] = useState("Enter Location");
-  const [countries, setCountries] = useState([]);
+const HouseContextProvider = ({ children, houseData, nearMeState }) => {
+  const [houses, setHouses] = useState([]);
+  console.log(houses);
+
+  const [address, setAddress] = useState("Enter Location");
+  const [addresses, setAddresses] = useState([]);
   const [property, setProperty] = useState("Property (Any)");
   const [properties, setProperties] = useState([]);
   const [price, setPrice] = useState("Price (Any)");
   const [loading, setLoading] = useState(false);
 
-  // Return all countries
   useEffect(() => {
-    const allCountries = housesData.map((house) => {
-      return house.country;
+    const fetchData = async () => {
+      try {
+        const allDatas = houseData ? houseData : await fetchDefaultData();
+        console.log(allDatas);
+        console.log("Before setHouses:", allDatas);
+        setHouses([...allDatas] || "can't update data");
+
+        console.log("After setHouses:", allDatas);
+      } catch (error) {
+        alert("Error on fetching data:", error);
+        console.log("Error on fetching data:", error);
+      }
+    };
+
+    const fetchDefaultData = async () => {
+      const response = await fetch("/mainProperties", {
+        method: "GET",
+      });
+      return response.json();
+    };
+
+    fetchData();
+  }, [houseData]);
+
+  useEffect(() => {
+    console.log("Updated houses:", houses);
+  }, [houses]);
+
+  useEffect(() => {
+    const allAddress = houses.map((house) => {
+      return houses.address;
     });
-    // Remove duplicates
-    const uniqueCountries = ["Location (Any)", ...new Set(allCountries)];
-    setCountries(uniqueCountries);
+
+    const uniqueCountries = ["Location (Any)", ...new Set(allAddress)];
+    setAddresses(uniqueCountries);
   }, []);
 
-  // Return all properties
   useEffect(() => {
     const allProperties = houses.map((house) => {
-      return house.type;
+      return houses.propertyType;
     });
-    // Remove duplicates
     const uniqueProperties = ["Property (Any)", ...new Set(allProperties)];
     setProperties(uniqueProperties);
   }, []);
@@ -42,77 +72,86 @@ const HouseContextProvider = ({ children }) => {
     const minPrice = Number(price.split(" ")[0]);
     const maxPrice = Number(price.split(" ")[2]);
 
-    const newHouses = housesData.filter((house) => {
+    const newHouses = houses.filter((house) => {
       const housePrice = Number(house.price);
+      console.log(housePrice)
 
       if (
-        house.country === country &&
-        house.type === property &&
+        house.address === address &&
+        house.propertyType === property &&
         housePrice >= minPrice &&
         housePrice <= maxPrice
       ) {
         return true;
       }
 
-      if (
-        isDefault(country) &&
-        isDefault(property) &&
-        isDefault(price)
-      ) {
+      if (isDefault(address) && isDefault(property) && isDefault(price)) {
         return true;
       }
 
-      if (!isDefault(country) && isDefault(property) && isDefault(price)) {
-        return house.country === country;
+      if (!isDefault(address) && isDefault(property) && isDefault(price)) {
+        return house.address === address;
       }
 
-      if (!isDefault(property) && isDefault(country) && isDefault(price)) {
-        return house.type === property;
+      if (!isDefault(property) && isDefault(address) && isDefault(price)) {
+        return house.propertyType === property;
       }
 
-      if (!isDefault(price) && isDefault(country) && isDefault(property)) {
+      if (!isDefault(price) && isDefault(address) && isDefault(property)) {
         return housePrice >= minPrice && housePrice <= maxPrice;
       }
 
-      if (!isDefault(country) && !isDefault(property) && isDefault(price)) {
-        return house.country === country && house.type === property;
+      if (!isDefault(address) && !isDefault(property) && isDefault(price)) {
+        return house.address === address && house.propertyType === property;
       }
 
-      if (!isDefault(country) && isDefault(property) && !isDefault(price)) {
+      if (!isDefault(address) && isDefault(property) && !isDefault(price)) {
         return housePrice >= minPrice && housePrice <= maxPrice;
       }
 
-      if (isDefault(country) && !isDefault(property) && !isDefault(price)) {
-        return house.type === property;
+      if (isDefault(address) && !isDefault(property) && !isDefault(price)) {
+        return house.propertyType === property;
       }
 
       return false;
     });
+    console.log("Filtered Houses:", newHouses);
 
     setTimeout(() => {
       setHouses(newHouses.length < 1 ? [] : newHouses);
       setLoading(false);
     }, 600);
+    
   };
 
   return (
-    <HouseContext.Provider
-      value={{
-        country,
-        setCountry,
-        countries,
-        property,
-        setProperty,
-        properties,
-        price,
-        setPrice,
-        houses,
-        loading,
-        handleClick,
-      }}
-    >
+    <>
+      <HouseContext.Provider
+        value={{
+          address,
+          setAddress,
+          addresses,
+          property,
+          setProperty,
+          properties,
+          price,
+          setPrice,
+          houses,
+          loading,
+          handleClick,
+        }}
+      >
       {children}
-    </HouseContext.Provider>
+{/*        
+       <NearMeHouseData.Provider value={{ houseData }}>
+         {children}
+       </NearMeHouseData.Provider> */}
+       
+      </HouseContext.Provider>
+
+    </>
+
+    
   );
 };
 

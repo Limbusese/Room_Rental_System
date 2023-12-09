@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const propertySchema = new Schema({
-    type:{
-    String,
+    propertyType:{
+        type: String,
         required: true
     },
     district:{
@@ -12,32 +12,46 @@ const propertySchema = new Schema({
     },
     address:{
         type: String,
-        required: true,
+        required: true
     },
     bedrooms:{
-        type: Int32Array,
-        requird: true,
+        type: Number,
+        requiredd: true
     },
     bathrooms:{
-        type: Int32Array,
-        requird: true,
+        type: Number,
+        required: true
     },
     price:{
-        type: Float64Array,
-        required: true,
+        type: Number,
+        required: true
     },
-    area:{
-        type: Float64Array,
-        required: true,
+    area:{  
+        type: Number,
+        required: true
     },
-    description:{
+    descriptions:{
         type: String,
-        required: true,
+        required: true
     },
-    image:[{
-        type:String,
-        required: true,
-    }]
+    images:{
+        type: String,
+        required: true
+    },
+    location: {
+        type: { 
+            type: String, 
+            required: true,
+            enum: ["Point"],
+            default: 'Point'
+        },  
+        coordinates: {
+            type: [Number],
+            required: true,
+        }
+    },
   });
-  
+
+  propertySchema.index({ location: "2dsphere" });
   exports.Property = mongoose.model('Property', propertySchema);
+  

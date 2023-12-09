@@ -1,21 +1,18 @@
-import React, { useContext } from 'react';
-
-//import housecontext
+import React, { useContext ,useEffect} from 'react';
 import { HouseContext } from './HouseContext';
-
-//import house
 import House from '../components/House'
-
-//import link 
 import { Link } from 'react-router-dom';
 
-//import icons
 import { ImSpinner9 } from 'react-icons/im';
 
-const HouseList = () => {
-  const {houses, loading} = useContext(HouseContext);
+const HouseList = ({nearMeState}) => {
+  const {houses, loading } = useContext(HouseContext);
+  console.log({houses})
+  
+    console.log('HouseList effect triggered with new houses:', loading  ); 
+   
 
-  //if loading is true
+  
   if(loading) {
     return (<ImSpinner9 className='mx-auto  text-violet-700 text-4xl animate-spin mt-[24px]'/>)
   }
@@ -26,21 +23,18 @@ const HouseList = () => {
 
   
   return <section className='mb-20'>
-      <div className='container mx-auto
-       '>
-        <div className='text-center uppercase  text-[30px] my-8 text-black font-semibold border-b-2'>
-          <h3>-Top Houeses To Explore-</h3>
-        </div>
+
+        
         <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-14'>
-          {houses.map((house, index) =>{
+          {houses.map(( house, index) =>{
             return(
-              <Link to={`/property/${house.id}`} key={index}>
+              <Link to={`/property/${house._id}`} key={index}>
                 <House house = {house} />
               </Link>
             )
           })}
         </div>
-       </div>
+    
 
   </section>;
 };

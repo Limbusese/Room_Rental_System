@@ -2,16 +2,17 @@ import React, { useContext, useState } from "react";
 import { RiMapPinLine } from "react-icons/ri";
 import { Combobox } from "@headlessui/react";
 import { HouseContext } from "./HouseContext";
+import NearMe from "./NearMe";
 
 const CountryDropdown = () => {
-  const { country, setCountry, countries } = useContext(HouseContext);
+  const { address, setAddress, addresses } = useContext(HouseContext);
   const [query, setQuery] = useState("");
 
   const filteredLocations = () => {
     if (query === "") {
-      return countries;
+      return addresses;
     } else {
-      return countries.filter((location) =>
+      return addresses.filter((location) =>
         location.toLowerCase().includes(query.toLowerCase())
       );
     }
@@ -22,14 +23,14 @@ const CountryDropdown = () => {
       <Combobox
         as="div"
         className="dropdown flex items-center z-30 "
-        onChange={setCountry}
+        onChange={setAddress}
       >
         <div className="flex items-center ">
           <RiMapPinLine className="absolute ml-6 dropdown-icon-primary text" />
           <Combobox.Input
             className="  text-center dropdown-btn text-white bg-transparent cursor-pointer relative "
             onChange={(event) => setQuery(event.target.value)}
-            placeholder={country}
+            placeholder={address}
           />
         </div>
 
@@ -46,11 +47,6 @@ const CountryDropdown = () => {
         </Combobox.Options>
       </Combobox> 
 
-      <div className=" mt-1 z-0">
-       <label>
-        <input type="checkbox"className="text-[1em]"/> <span className="text-white font-[500] text-[1em]">Near Me</span>
-       </label>
-      </div>
     </div>
   );
 };

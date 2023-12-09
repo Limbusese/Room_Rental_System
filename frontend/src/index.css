@@ -91,3 +91,8 @@
     @apply scale-100;
   }
 }
+
+/* for validation */
+.errmessage {
+  @apply text-red-700 text-[14px] 
+}

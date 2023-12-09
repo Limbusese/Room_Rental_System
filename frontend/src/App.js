@@ -1,16 +1,16 @@
 import React from "react";
-
-// Import components
 import Footer from "./components/Footer";
-
-// Import pages
 import Home from "./pages/Home";
 
-import Login from "./components/Login";
+
 import PropertyDetails from "./pages/PropertyDetails";
+import NearMePropertyDetails from "./pages/NearMePropertyDetails"
 import AdminPanel from "../src/components/AdminDashboard/AdminPanel";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CreateForm from "./components/AdminDashboard/PropertyForm";
+
+import PropertyUpdateForm from "./components/AdminDashboard/PropertyUpdateForm";
+import NearMe from "./components/NearMe";
+import NearMeHouse from "./components/NearMeHouse";
 
 
 const App = () => {
@@ -18,11 +18,12 @@ const App = () => {
     <div className="max-w-full mx-auto bg-slate-100 rounded-lg">
       <Router>
         <Routes>
-        <Route path="/addproperty" element={ <CreateForm/ >} />
-          <Route path="/dashboard" element={ <AdminPanel/ >} />
-          <Route path="/register" element={<Login/>} />
           <Route path="/" element={<Home />} />
+          <Route path="/updateProperty/:_id" element={ <PropertyUpdateForm /> } />
+          <Route path="/dashboard" element={ <AdminPanel/ >} />
           <Route path="/property/:id" element={<PropertyDetails />} />
+          <Route path="/nearmeproperty/:id" element={<NearMePropertyDetails />} />
+          <Route path="/nearMe" element = {NearMeHouse}/>
         </Routes>
       </Router>
       <Footer />

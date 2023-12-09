@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
 
-//import components
 import CountryDropdown from './CountryDropdown'
 import PropertyDropDown from './PropertyDropdown'
 import PriceRangeDropDown from './PriceRangeDropdown'
 
-
-//Import icons
 import {RiSearch2Line} from 'react-icons/ri'
 
 //Import context
