@@ -13,13 +13,17 @@ server.use(express.json());
 server.use(bodyParser.json());
 server.use("/",propertyRouter.router);
 server.use(express.urlencoded({ extended: true }));
-
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
-});
+}); 
 
+mongodb+srv://SeseLimbu:qOnmd4iWEUZkbEfz@kothanepal.jp5vo9m.mongodb.net/?retryWrites=true&w=majority
+
+server.get("/", async (req, res) => {
+  res.json("hello this is server!");
+}
 
 server.post("/register", async (req, res) => {
   try {
